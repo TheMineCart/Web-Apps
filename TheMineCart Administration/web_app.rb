@@ -1,8 +1,12 @@
+# gem install mongo
+# gem install bson
+# gem install bson_ext
+
 require 'sinatra'
 require File.dirname(__FILE__) + '/better_protected_database'
 require File.dirname(__FILE__) + '/crafter_tracker_database.rb'
 
-set :haml, :format => :html5
+set :haml, format: :html5, layout: true
 
 better_protected_db = BetterProtectedDatabase.new
 crafter_tracker_db = CrafterTrackerDatabase.new
@@ -23,4 +27,8 @@ get '/player_report/:name' do
   ct_player = CT_PLAYERS.find_one(username: params[:name])
 
   haml :player_report, locals: {bp_player: bp_player, ct_player: ct_player}
+end
+
+get '/block_history' do
+  haml :block_history
 end
