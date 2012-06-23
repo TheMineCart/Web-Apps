@@ -1,31 +1,37 @@
 %h1
-  Player Report
+  =bp_player['username']
 
-%h2
-  = averageMinutesPlayed(ct_player['joinedOn'], ct_player['minutesPlayed'])
-%dl
-  %dt
-    bp_player
-  %dd
-    = bp_player
-  %dt
-    ct_player
-  %dd
-    = ct_player
+.span12
+  .span4
+    %dl.dl-horizontal
+      %dt Joined On
+      %dd=formatTime(ct_player['joinedOn'])
 
+      %dt Score
+      %dd=ct_player['score']
 
-.span6
-  %dl.dl-horizontal
-    %dt Name
-    %dd=bp_player['username']
+      %dt Penalty
+      %dd=ct_player['penalty'] ? "-#{ct_player['penalty']}" : 0
 
-    %dt Joined On
-    %dd=formatTime(ct_player['joinedOn'])
+      %dt Minutes Played
+      %dd=ct_player['minutesPlayed']
 
-    %dt Total Minutes Played
-    %dd=ct_player['minutesPlayed']
+      %dt Average Per Day
+      %dd=averageMinutesPlayed(ct_player['joinedOn'], ct_player['minutesPlayed'])
 
-    %dt Average Minutes Per Day
-    %dd=averageMinutesPlayed(ct_player['joinedOn'], ct_player['minutesPlayed'])
+      %dt Block Broken
+      %dd=ct_player['blocksBroken']
 
+      %dt Block Placed
+      %dd=ct_player['blocksPlaced']
+
+  .span4
+    %dl.dl-horizontal
+      %dt Protection On
+      %dd=bp_player["protectionEnabled"]
+
+      %dt Friends
+      -bp_player['friends'].each do |friend|
+        %dd
+          =friend
 

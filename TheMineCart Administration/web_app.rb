@@ -8,6 +8,7 @@ require File.dirname(__FILE__) + '/crafter_tracker_database.rb'
 require File.dirname(__FILE__) + '/helpers'
 
 set :haml, format: :html5, layout: true
+enable :logging
 
 better_protected_db = BetterProtectedDatabase.new
 crafter_tracker_db = CrafterTrackerDatabase.new
