@@ -1,4 +1,4 @@
-require 'Date'
+require 'date'
 
 helpers do
   SECONDS_IN_A_DAY = 86400
