@@ -2,12 +2,30 @@
   Player Report
 
 %h2
-  BetterProtected Player
-%p
-  = bp_player
+  = averageMinutesPlayed(ct_player['joinedOn'], ct_player['minutesPlayed'])
+%dl
+  %dt
+    bp_player
+  %dd
+    = bp_player
+  %dt
+    ct_player
+  %dd
+    = ct_player
 
-%h2
-  CrafterTracker Player
-%p
-  = ct_player
+
+.span6
+  %dl.dl-horizontal
+    %dt Name
+    %dd=bp_player['username']
+
+    %dt Joined On
+    %dd=formatTime(ct_player['joinedOn'])
+
+    %dt Total Minutes Played
+    %dd=ct_player['minutesPlayed']
+
+    %dt Average Minutes Per Day
+    %dd=averageMinutesPlayed(ct_player['joinedOn'], ct_player['minutesPlayed'])
+
 
