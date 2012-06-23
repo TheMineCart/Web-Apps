@@ -16,7 +16,7 @@ helpers do
   end
 
   def averageMinutesPlayed(joinedOn, minutesPlayed)
-    daysSinceJoinDate = Date.today - parseDate(joinedOn)
+    daysSinceJoinDate = Integer(Date.today - parseDate(joinedOn)) + 1
     (Integer(minutesPlayed)/daysSinceJoinDate).to_i
   end
 end
