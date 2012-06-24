@@ -1,110 +1,19 @@
+%script{src: '/js/player-info-report.js'}
+
 %h1
-  =bp_player['username']
-
-.span12
-  .span4
-    %dl.dl-horizontal
-      %dt Joined On
-      %dd=formatTime(ct_player['joinedOn'])
-
-      %dt Score
-      %dd=ct_player['score']
-
-      %dt Penalty
-      %dd=ct_player['penaltyScore'] > 0 ? "-#{ct_player['penaltyScore']}" : 0
-
-      %dt Minutes Played
-      %dd=ct_player['minutesPlayed']
-
-      %dt Average Per Day
-      %dd=averageMinutesPlayed(ct_player['joinedOn'], ct_player['minutesPlayed'])
-
-      %dt Block Broken
-      %dd=ct_player['blocksBroken']
-
-      %dt Block Placed
-      %dd=ct_player['blocksPlaced']
-
-  .span4
-    %dl.dl-horizontal
-      %dt Protection On
-      %dd{class: bp_player['protectionEnabled'] == true ? 'green' : 'red'}
-        = bp_player['protectionEnabled'] == true ? 'yes' : 'no'
-
-      %dt Friends
-      -bp_player['friends'].each do |friend|
-        %dd
-          =friend
-
-.clearfix
-
-- if warnings.count > 0
-  %h2
-    Warnings
-  %table.table-striped.table-bordered.td-pad-left.td-pat-top-bottom.span10
-    %thead
-      %tr
-        %th
-          Infraction
-        %th
-          Sent By
-        %th
-          Issued At
-        %th
-          Message Text
-        %th
-          Points Lost
-        %th
-          Ack&nbsp;
-    %tbody
-      -warnings.each do |warning|
-        %tr
-          %td{class: infractionColor(warning['infraction'])}
-            = warning['infraction']
-          %td
-            = warning['sender']
-          %td.time-cell
-            = formatTime(warning['issuedAt'])
-          %td.text-cell
-            = warning['text']
-          %td
-            = warning['score']
-          %td{class: warning['acknowledged'] == true ? 'green' : 'red'}
-            = warning['acknowledged'] == true ? 'yes' : 'no'
+  Query Player
+%br
+#player-info-query.form-inline
+  %label.pad-left
+    username:
+  %input#username.input-medium{type: 'text', name: 'username'}
+  %button#submit.margin-left.btn-primary
+    Submit
 
 .clearfix
 %br
+%br
 
-- if sessions.count > 0
-  %h2
-    Session Data
-  %table.table-striped.table-bordered.td-pad-left.td-pat-top-bottom.span10
-    %thead
-      %tr
-        %th
-          IP Address
-        %th
-          Connect At
-        %th
-          Disconnect At
-        %th
-          Minutes
-        %th
-          Broken
-        %th
-          Placed
-    %tbody
-      -sessions.each do |session|
-        %tr
-          %td
-            = session['ipAddress']
-          %td.time-cell
-            = formatTime(session['connectedAt'])
-          %td.time-cell
-            = formatTime(session['disconnectedAt'])
-          %td
-            = minutesPlayed(session['connectedAt'], session['disconnectedAt'])
-          %td
-            = session['blocksBroken']
-          %td
-            = session['blocksPlaced']
+%h1#player-name-header
+
+#player-info-content

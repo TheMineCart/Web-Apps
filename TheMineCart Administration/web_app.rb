@@ -25,19 +25,25 @@ get '/' do
   haml :index
 end
 
-get '/player_report/:name' do
-  bp_player = BP_PLAYERS.find_one(username: params[:name])
-  ct_player = CT_PLAYERS.find_one(username: params[:name])
-
-  if bp_player && ct_player
-    sessions = CT_SESSIONS.find(username: params[:name]).sort('connectedAt', 'descending').limit(30)
-    warnings = CT_WARNINGS.find(recipient: params[:name]).sort('issuedAt', 'descending')
-
-    haml :player_report, locals: {bp_player: bp_player, ct_player: ct_player, sessions: sessions, warnings: warnings}
-  else
-    haml :record_not_found
-  end
+get '/player_report' do
+  haml :player_report
 end
+
+get '/player_info' do
+  if exists?(params[:username])
+    bp_player = BP_PLAYERS.find_one(username: params[:username])
+    ct_player = CT_PLAYERS.find_one(username: params[:username])
+    if bp_player && ct_player
+      sessions = CT_SESSIONS.find(username: params[:username]).sort('connectedAt', 'descending').limit(30)
+      warnings = CT_WARNINGS.find(recipient: params[:username]).sort('issuedAt', 'descending')
+      haml :player_info, layout: false, locals: {bp_player: bp_player, ct_player: ct_player, sessions: sessions, warnings: warnings}
+    else
+      haml :record_not_found, layout: false
+    end
+  else
+    haml :form_incomplete, layout: false
+  end
+ end
 
 get '/block_history' do
   haml :block_history
