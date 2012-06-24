@@ -27,7 +27,7 @@ label {
     width: 180px;
 }
 
-.major-warning, .red{
+.major-warning, .red, .removed-type{
     color: red;
 }
 
@@ -35,10 +35,10 @@ label {
     color: orange;
 }
 
-.minor-warning {
+.minor-warning, .unprotected-type {
     color: #aaaa00;
 }
 
-.no-warning, .green{
+.no-warning, .green, .placed-type{
     color: green;
 }

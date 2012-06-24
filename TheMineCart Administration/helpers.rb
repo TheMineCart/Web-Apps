@@ -31,4 +31,13 @@ helpers do
     }
     "no-warning"
   end
+
+  def eventTypeColor(event_type)
+    downcase_type = event_type.downcase
+
+    ["removed", "placed", "unprotected"].map{ |type|
+      return "#{type}-type" if type == downcase_type
+    }
+    ""
+  end
 end

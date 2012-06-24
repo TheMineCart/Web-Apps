@@ -15,11 +15,11 @@
     %tbody
       -block_events.each do |block_event|
         %tr
-          %td
+          %td{class: eventTypeColor(block_event['e'])}
             = block_event['e']
           %td
             = block_event['m']
           %td
             = block_event['o']
-          %td
+          %td.time-cell
             = formatTime(block_event['i'])
