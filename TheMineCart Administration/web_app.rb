@@ -26,7 +26,7 @@ get '/' do
   most_active = CT_PLAYERS.find().sort('minutesPlayed', 'descending').limit(10)
   highest_scores = CT_PLAYERS.find().sort('score', 'descending').limit(10)
   highest_penalties = CT_PLAYERS.find().sort('penaltyScore', 'descending').limit(10)
-  recent_warnings = CT_WARNINGS.find().sort('issuedAt', 'descending').limit(10)
+  recent_warnings = CT_WARNINGS.find().sort('issuedAt', 'descending').limit(12)
 
   haml :index, locals: {most_active: most_active,
                         most_recent: most_recent,
