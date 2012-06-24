@@ -3,6 +3,7 @@
 # gem install bson_ext
 
 require 'sinatra'
+require 'json'
 require File.dirname(__FILE__) + '/better_protected_database'
 require File.dirname(__FILE__) + '/crafter_tracker_database.rb'
 require File.dirname(__FILE__) + '/helpers'
@@ -29,7 +30,7 @@ get '/player_report/:name' do
   ct_player = CT_PLAYERS.find_one(username: params[:name])
 
   if bp_player && ct_player
-    sessions = CT_SESSIONS.find(username: params[:name]).limit(20).sort('connectedAt', 'descending')
+    sessions = CT_SESSIONS.find(username: params[:name]).sort('connectedAt', 'descending').limit(30)
     warnings = CT_WARNINGS.find(recipient: params[:name]).sort('issuedAt', 'descending')
 
     haml :player_report, locals: {bp_player: bp_player, ct_player: ct_player, sessions: sessions, warnings: warnings}
@@ -40,4 +41,24 @@ end
 
 get '/block_history' do
   haml :block_history
+end
+
+get '/block_events' do
+  if block_event_params_exist?(params)
+    block_events = BP_BLOCK_EVENTS.find(b: {x: Integer(params[:x]), y: Integer(params[:y]), z: Integer(params[:z])}, w: params[:world])
+    haml :block_events, layout: false, locals: {block_events: block_events}
+  else
+    haml :form_incomplete, layout: false
+  end
+end
+
+private
+
+def block_event_params_exist?(params)
+  return true if exists?(params[:x]) && exists?(params[:y]) && exists?(params[:z]) && exists?(params[:world])
+  false
+end
+
+def exists?(param)
+  (param && param != "") ? true : false
 end

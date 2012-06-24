@@ -1,0 +1,25 @@
+- if block_events.count <= 0
+  There is no history for this coordinate...
+- else
+  %table.table-striped.table-bordered.td-pad-left.td-pat-top-bottom.span10
+    %thead
+      %tr
+        %th
+          Action
+        %th
+          Material
+        %th
+          By
+        %th
+          Instant
+    %tbody
+      -block_events.each do |block_event|
+        %tr
+          %td
+            = block_event['e']
+          %td
+            = block_event['m']
+          %td
+            = block_event['o']
+          %td
+            = formatTime(block_event['i'])

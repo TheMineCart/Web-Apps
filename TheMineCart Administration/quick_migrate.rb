@@ -37,7 +37,7 @@ def reformat_keys_on(bson_object, original)
 end
 
 def transform_and_copy_block_events
-  new_events_on_new_database = get_collection("BlockEvents", get_db("TempDatabase"))
+  new_events_on_new_database = get_collection("BlockEvents", get_db("BetterProtected"))
   block_events = get_collection("BlockEvents", get_db("BetterProtected"))
 
   count = 0.0
@@ -56,7 +56,7 @@ def transform_and_copy_block_events
 end
 
 def copy_players
-  new_players = get_collection("Players", get_db("TempDatabase"))
+  new_players = get_collection("Players", get_db("BetterProtected"))
   old_players = get_collection("Players", get_db("BetterProtected"))
 
   count = 0.0

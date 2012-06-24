@@ -1,2 +1,36 @@
+%script{src: '/js/block-event-history.js'}
+
 %h1
-  This page has not yet been built!
+  Block Events
+
+#block-event-query.form-inline
+  %label.pad-left
+    x:
+  %input#x.input-mini{type: 'number', name: 'x'}
+
+  %label.pad-left
+    y:
+  %input#y.input-mini{type: 'number', name: 'y'}
+
+  %label.pad-left
+    z:
+  %input#z.input-mini{type: 'number', name: 'z'}
+
+  %label.pad-left
+    world:
+  %select#world.input-medium{name: 'world'}
+    - ["world", "world_nether", "pvpworld", "pvpworld_nether", "world_the_end"].each do |name|
+      %option{value: name}=name
+
+
+  %button#submit.margin-left.btn-primary
+    Submit
+
+.clearfix
+%br
+%br
+
+%h2#history-table-header
+  History for (0, 0, 0) in world
+
+#history-table

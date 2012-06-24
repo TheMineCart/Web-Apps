@@ -2,13 +2,21 @@
     text-align: center;
 }
 
-table.td-pad-left tr td {
+table.td-pad-left tr td, .pad-left {
     padding-left: 10px;
+}
+
+.margin-left {
+    margin-left: 10px;
 }
 
 table.td-pat-top-bottom tr td {
     padding-top: 2px;
     padding-bottom: 2px;
+}
+
+label {
+    font-weight: bold;
 }
 
 .text-cell {
