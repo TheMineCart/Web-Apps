@@ -15,6 +15,10 @@ helpers do
     parseTime(time).strftime("%m/%d/%Y - %l:%M %p %z")
   end
 
+  def minutesPlayed(connected, disconnected)
+    Integer((parseTime(disconnected) - parseTime(connected))/60)
+  end
+
   def averageMinutesPlayed(joinedOn, minutesPlayed)
     daysSinceJoinDate = Integer(Date.today - parseDate(joinedOn)) + 1
     (Integer(minutesPlayed)/daysSinceJoinDate).to_i

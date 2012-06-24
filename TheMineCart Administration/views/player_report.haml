@@ -87,6 +87,8 @@
         %th
           Disconnect At
         %th
+          Minutes
+        %th
           Broken
         %th
           Placed
@@ -95,10 +97,12 @@
         %tr
           %td
             = session['ipAddress']
-          %td
+          %td.time-cell
             = formatTime(session['connectedAt'])
-          %td
+          %td.time-cell
             = formatTime(session['disconnectedAt'])
+          %td
+            = minutesPlayed(session['connectedAt'], session['disconnectedAt'])
           %td
             = session['blocksBroken']
           %td
