@@ -27,18 +27,22 @@ label {
     width: 180px;
 }
 
-.major-warning, .red, .removed-type{
+.red, .major-warning, .removed-type{
     color: red;
 }
 
-.moderate-warning {
+.orange, .moderate-warning {
     color: orange;
 }
 
-.minor-warning, .unprotected-type {
+.yellow, .minor-warning, .unprotected-type {
     color: #aaaa00;
 }
 
-.no-warning, .green, .placed-type{
+.green, .no-warning, .placed-type{
     color: green;
+}
+
+.bold {
+    font-weight: bold;
 }

@@ -22,7 +22,17 @@ CT_SESSIONS = crafter_tracker_db.sessions
 CT_WARNINGS = crafter_tracker_db.warning_messages
 
 get '/' do
-  haml :index
+  most_recent = CT_SESSIONS.find().sort('disconnectedAt', 'descending').limit(10)
+  most_active = CT_PLAYERS.find().sort('minutesPlayed', 'descending').limit(10)
+  highest_scores = CT_PLAYERS.find().sort('score', 'descending').limit(10)
+  highest_penalties = CT_PLAYERS.find().sort('penaltyScore', 'descending').limit(10)
+  recent_warnings = CT_WARNINGS.find().sort('issuedAt', 'descending').limit(10)
+
+  haml :index, locals: {most_active: most_active,
+                        most_recent: most_recent,
+                        highest_scores: highest_scores,
+                        highest_penalties: highest_penalties,
+                        recent_warnings: recent_warnings}
 end
 
 get '/player_report' do

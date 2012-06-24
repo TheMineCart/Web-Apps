@@ -1,4 +1,102 @@
 %h1
-  The Mine Cart
-%h2
-  Staff Web App!
+  Dashboard
+
+%hr
+
+%table.table-striped.table-bordered.td-pad-left.td-pat-top-bottom.span5
+  %caption
+    %h4
+      Most Recent Sessions
+  %tr
+    %th
+      Username
+    %th
+      Disconnected At
+    %th
+      Minutes Online
+  -most_recent.each do |session|
+    %tr
+      %td
+        = session['username']
+      %td.time-cell
+        = formatTime(session['disconnectedAt'])
+      %td
+        = minutesPlayed(session['connectedAt'], session['disconnectedAt'])
+
+
+
+%table.table-striped.table-bordered.td-pad-left.td-pat-top-bottom.span6
+  %caption
+    %h4
+      Recently Warned
+  %tr
+    %th
+      Username
+    %th
+      Infraction
+    %th
+      Lost
+    %th
+      Reason
+  - recent_warnings.each do |warning|
+    %tr
+      %td
+        = warning['recipient']
+      %td{class: infractionColor(warning['infraction'])}
+        = warning['infraction']
+      %td
+        = warning['score']
+      %td
+        = warning['text']
+.clearfix
+%hr
+
+%table.table-striped.table-bordered.td-pad-left.td-pat-top-bottom.span3.content
+  %caption
+    %h4
+      Most Active Players
+  %tr
+    %th
+      Username
+    %th
+      Minutes
+  - most_active.each do |player|
+    %tr
+      %td
+        = player['username']
+      %td
+        = player['minutesPlayed']
+
+
+%table.table-striped.table-bordered.td-pad-left.td-pad-top-bottom.span3
+  %caption
+    %h4
+      Highest Score
+  %tr
+    %th
+      Username
+    %th
+      Score
+  - highest_scores.each do |player|
+    %tr
+      %td
+        = player['username']
+      %td
+        = player['score']
+
+%table.table-striped.table-bordered.td-pad-left.td-pad-top-bottom.span3
+  %caption
+    %h4
+      Highest Penalty
+  %tr
+    %th
+      Username
+    %th
+      Lost
+  - highest_penalties.each do |player|
+    %tr
+      %td
+        = player['username']
+      %td
+        = player['penaltyScore']
+
