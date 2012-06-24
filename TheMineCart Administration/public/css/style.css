@@ -1,0 +1,36 @@
+.content-centered {
+    text-align: center;
+}
+
+table.td-pad-left tr td {
+    padding-left: 10px;
+}
+
+table.td-pat-top-bottom tr td {
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+
+.text-cell {
+    width: 300px;
+}
+
+.time-cell {
+    width: 170px;
+}
+
+.major-warning, .red{
+    color: red;
+}
+
+.moderate-warning {
+    color: orange;
+}
+
+.minor-warning {
+    color: #aaaa00;
+}
+
+.no-warning, .green{
+    color: green;
+}

@@ -19,4 +19,12 @@ helpers do
     daysSinceJoinDate = Integer(Date.today - parseDate(joinedOn)) + 1
     (Integer(minutesPlayed)/daysSinceJoinDate).to_i
   end
+
+  def infractionColor(warning)
+    warning_level = warning.downcase
+    ["minor", "moderate", "major"].map{ |infraction|
+      return "#{infraction}-warning" if infraction == warning_level
+    }
+    "no-warning"
+  end
 end

@@ -27,10 +27,15 @@ end
 get '/player_report/:name' do
   bp_player = BP_PLAYERS.find_one(username: params[:name])
   ct_player = CT_PLAYERS.find_one(username: params[:name])
-  sessions = CT_SESSIONS.find(username: params[:name]).sort(connectedAt: -1).limit(10)
-  warnings = CT_WARNINGS.find(recipient: params[:name])
 
-  haml :player_report, locals: {bp_player: bp_player, ct_player: ct_player, sessions: sessions, warnings: warnings}
+  if bp_player && ct_player
+    sessions = CT_SESSIONS.find(username: params[:name]).limit(20).sort('connectedAt', 'descending')
+    warnings = CT_WARNINGS.find(recipient: params[:name]).sort('issuedAt', 'descending')
+
+    haml :player_report, locals: {bp_player: bp_player, ct_player: ct_player, sessions: sessions, warnings: warnings}
+  else
+    haml :record_not_found
+  end
 end
 
 get '/block_history' do
