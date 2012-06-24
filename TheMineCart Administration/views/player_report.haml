@@ -37,67 +37,69 @@
 
 .clearfix
 
-%h2
-  Warnings
-%table.table-striped.table-bordered.td-pad-left.td-pat-top-bottom.span10
-  %thead
-    %tr
-      %th
-        Infraction
-      %th
-        Sent By
-      %th
-        Issued At
-      %th
-        Message Text
-      %th
-        Points Lost
-      %th
-        Ack&nbsp;
-  %tbody
-    -warnings.each do |warning|
+- if warnings.count > 0
+  %h2
+    Warnings
+  %table.table-striped.table-bordered.td-pad-left.td-pat-top-bottom.span10
+    %thead
       %tr
-        %td{class: infractionColor(warning['infraction'])}
-          = warning['infraction']
-        %td
-          = warning['sender']
-        %td.time-cell
-          = formatTime(warning['issuedAt'])
-        %td.text-cell
-          = warning['text']
-        %td
-          = warning['score']
-        %td{class: warning['acknowledged'] == "true" ? "green" : "red"}
-          = warning['acknowledged'] == "true" ? "yes" : "no"
+        %th
+          Infraction
+        %th
+          Sent By
+        %th
+          Issued At
+        %th
+          Message Text
+        %th
+          Points Lost
+        %th
+          Ack&nbsp;
+    %tbody
+      -warnings.each do |warning|
+        %tr
+          %td{class: infractionColor(warning['infraction'])}
+            = warning['infraction']
+          %td
+            = warning['sender']
+          %td.time-cell
+            = formatTime(warning['issuedAt'])
+          %td.text-cell
+            = warning['text']
+          %td
+            = warning['score']
+          %td{class: warning['acknowledged'] == "true" ? "green" : "red"}
+            = warning['acknowledged'] == "true" ? "yes" : "no"
 
 .clearfix
 %br
 
-%h2
-  Session Data
-%table.table-striped.table-bordered.td-pad-left.td-pat-top-bottom.span10
-  %thead
-    %tr
-      %th
-        IP Address
-      %th
-        Connect At
-      %th
-        Disconnect At
-      %th
-        Broken
-      %th
-        Placed
-  %tbody
-    -sessions.each do |session|
+- if sessions.count > 0
+  %h2
+    Session Data
+  %table.table-striped.table-bordered.td-pad-left.td-pat-top-bottom.span10
+    %thead
       %tr
-        %td
-          = session['ipAddress']
-        %td
-          = formatTime(session['connectedAt'])
-        %td
-          = formatTime(session['disconnectedAt'])
-        %td
-          = session['blocksBroken']
-        %td
-          = session['blocksPlaced']
+        %th
+          IP Address
+        %th
+          Connect At
+        %th
+          Disconnect At
+        %th
+          Broken
+        %th
+          Placed
+    %tbody
+      -sessions.each do |session|
+        %tr
+          %td
+            = session['ipAddress']
+          %td
+            = formatTime(session['connectedAt'])
+          %td
+            = formatTime(session['disconnectedAt'])
+          %td
+            = session['blocksBroken']
+          %td
+            = session['blocksPlaced']
