@@ -61,7 +61,7 @@ end
 
 get '/block_events' do
   if block_event_params_exist?(params)
-    block_events = BP_BLOCK_EVENTS.find(b: {x: Integer(params[:x]), y: Integer(params[:y]), z: Integer(params[:z])}, w: params[:world])
+    block_events = BP_BLOCK_EVENTS.find(b: {x: Integer(params[:x]), y: Integer(params[:y]), z: Integer(params[:z])}, w: params[:world]).sort('i', 'descending')
     haml :block_events, layout: false, locals: {block_events: block_events}
   else
     haml :form_incomplete, layout: false
