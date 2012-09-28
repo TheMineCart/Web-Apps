@@ -1,3 +1,5 @@
+#    Copyright (C) 2012 Cyrus Innovation
+
 require 'mongo'
 require 'bson'
 

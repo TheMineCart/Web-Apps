@@ -1,3 +1,5 @@
+#    Copyright (C) 2012 Cyrus Innovation
+
 require 'date'
 
 helpers do

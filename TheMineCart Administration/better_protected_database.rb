@@ -1,3 +1,5 @@
+#    Copyright (C) 2012 Cyrus Innovation
+
 require File.dirname(__FILE__) + '/mongo_connection'
 
 class BetterProtectedDatabase < MongoConnection
