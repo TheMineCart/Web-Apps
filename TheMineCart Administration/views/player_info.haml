@@ -53,6 +53,7 @@
           Points Lost
         %th
           Ack&nbsp;
+        %th
     %tbody
       -warnings.each do |warning|
         %tr
@@ -68,7 +69,8 @@
             = warning['score']
           %td{class: warning['acknowledged'] == true ? 'green' : 'red'}
             = warning['acknowledged'] == true ? 'yes' : 'no'
-
+          %td
+            .icon-remove-circle.delete-warning
 .clearfix
 %br
 
